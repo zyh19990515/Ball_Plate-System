@@ -20,7 +20,7 @@ def pre_treat(img):
     return img_canny
 
 if __name__ == '__main__':
-    img = cv2.imread(".\\ball2.jpg")
+    img = cv2.imread(".\\std.jpg")
     img_pre = img
     cv2.imshow("111", img_pre)
     img = pre_treat(img)
@@ -33,7 +33,7 @@ if __name__ == '__main__':
 
     ballPt = [int(circle[0, 0, 0]), int(circle[0, 0, 1])]
     #print(ballPt)
-    cv2.circle(img_pre, ballPt, radius=10, color=(255, 0, 0), thickness=1)
+    cv2.circle(img_pre, ballPt, radius=2, color=(255, 0, 0), thickness=1)
 
     cv2.imshow("img", img_pre)
 
