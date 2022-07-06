@@ -84,12 +84,13 @@ class Detect():
             corner_arr[temp[0]], corner_arr[temp[2]], corner_arr[temp[3]], corner_arr[temp[1]]
         #print(corner_arr)
         return corner_arr
-    def getImg(self, img, corner_pt, ballpt):
+    def getImg(self, img, corner_pt):
         for i in corner_pt:
             cv2.circle(self.img, i, radius=5, color=(255, 0, 0), thickness=1)
         corner_pt_line = np.array([corner_pt])
         cv2.polylines(self.img, corner_pt_line, isClosed=True, color=(0, 255, 0), thickness=1)
-        cv2.circle(img_pre, ballPt, radius=5, color=(255, 0, 0), thickness=1)
+        #cv2.circle(img_pre, ballPt, radius=5, color=(255, 0, 0), thickness=1)
+        return img
 
     def board_main(self):
         print(self.size)

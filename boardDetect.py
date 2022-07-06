@@ -37,7 +37,7 @@ class Detect():
 
     def houghtTransform(self, img):
         #cv2.imshow("23", img)
-        lines = cv2.HoughLines(img, 1, np.pi / 180, 70)
+        lines = cv2.HoughLines(img, 1, np.pi / 180, 75)
         # print(lines)
         lines_1 = lines[:, 0, :]
         # print("line_1:\n", lines_1)
@@ -103,9 +103,10 @@ if __name__ == '__main__':
     start = time.time()
     BD = Detect(img)
     corner_pts = BD.board_main()
+    print(corner_pts)
     img = BD.getImg(img, corner_pts)
     end = time.time()
     cv2.imshow("1", img)
     #cv2.imshow("2", img_ball)
-    print(end-start)
+
     cv2.waitKey(0)
