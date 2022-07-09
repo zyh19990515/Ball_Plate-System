@@ -3,6 +3,7 @@ import numpy as np
 import os
 from detect import Detect
 import xlwt
+from kalmanfilter import KalmanFilter
 #from detect import Detect
 from kalmanfilter import KalmanFilter
 
@@ -21,8 +22,8 @@ def dataSave(corner_pt, cnt):
 
 
 if __name__ == '__main__':
-    video = cv2.VideoCapture(".\\no.2.avi")
-
+    video = cv2.VideoCapture(".\\video\\no.2.avi")
+    kf = KalmanFilter()
     cnt = 1
     book = xlwt.Workbook(encoding='utf-8')
     sheet = book.add_sheet('points')
@@ -40,24 +41,26 @@ if __name__ == '__main__':
         if not ret:
             print(ret)
             cv2.destroyAllWindows()
-            book.save(".\\ptdata\\3.csv")
+            book.save(".\\ptdata\\d.csv")
             break
         bd = Detect(img)
         try:
             corner_pts = bd.board_main()
-
+            predicted = kf.predict(corner_pts[0][0], corner_pts[0][1])
+            corner_pts[0][0] = predicted[0]
+            corner_pts[0][1] = predicted[1]
             img_show = bd.getImg(img, corner_pts)
             dataSave(corner_pt=corner_pts, cnt=cnt)
             cnt+=1
         except:
             print("no")
             continue
-        cv2.KalmanFilter()
+
         cv2.imshow("1", img_show)
         k = cv2.waitKey(1)
 
 
         if(k == 27):
             cv2.destroyAllWindows()
-            book.save(".\\ptdata\\3.csv")
+            book.save(".\\ptdata\\d.csv")
             break

@@ -5,7 +5,7 @@ import xlrd
 import time
 
 if __name__ == '__main__':
-    workbook = xlrd.open_workbook(".\\ptdata\\ptdata1.xls")
+    workbook = xlrd.open_workbook(".\\ptdata\\ptdata4.xls")
     sheet = workbook.sheet_by_index(0)
     data = [int(sheet.cell_value(i, 1)) for i in range(1, sheet.nrows)]
     # print(data)
@@ -15,7 +15,7 @@ if __name__ == '__main__':
     q = np.array([[0.5, 0], [0, 0.5]])
     h = np.array([1, 0])
     r = 1
-    data = data[0:100]
+    data = data[0:1000]
     x1 = []
     x2 = []
     print(len(data))
@@ -29,10 +29,10 @@ if __name__ == '__main__':
         # print("x:", x_)
         # print("h*x_", h*x_)
         x = x_+k*(data[i]-h*x_)
-        print(data[i])
-        print("\n")
-        print(data[i]-h*x_)
-        print("\n")
+        # print(data[i])
+        # print("\n")
+        # print(data[i]-h*x_)
+        # print("\n")
         p = (np.eye(2)-k*h)*p_
         x1.append(x[0][0])
         #x2.append(x[1])
