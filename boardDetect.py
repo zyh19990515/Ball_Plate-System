@@ -13,14 +13,14 @@ class Detect():
 
         #hsv_low = np.array([0, 0, 46])
         #hsv_high = np.array([180, 35, 255])
-        mask = cv2.inRange(img, lowerb=0, upperb=25)
+        mask = cv2.inRange(img, lowerb=0, upperb=40)
         # img_done = cv2.add(img_hsv, img_hsv, mask=mask)
         # img_done = cv2.cvtColor(img_done, cv2.COLOR_HSV2RGB)
         img_core = cv2.getStructuringElement(cv2.MORPH_CROSS, (10, 10))
-        mask = cv2.erode(mask, img_core, iterations=2)
+        mask = cv2.erode(mask, img_core, iterations=5)
         kernel = np.ones((4, 4), np.uint8)
-        mask = cv2.dilate(mask, kernel, iterations=5)
-        #cv2.imshow("maskb", mask)
+        mask = cv2.dilate(mask, kernel, iterations=10)
+        cv2.imshow("maskb", mask)
         return mask
 
 
@@ -99,7 +99,7 @@ class Detect():
 
 if __name__ == '__main__':
 
-    img = cv2.imread(".\\no.1.jpg")
+    img = cv2.imread(".\\no.0.jpg")
     start = time.time()
     BD = Detect(img)
     corner_pts = BD.board_main()

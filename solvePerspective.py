@@ -78,7 +78,6 @@ class perspectiveMatrix():
         pt = self.matrixNormalize(pt)
 
         img = pt.dot(perspectiveMatrix)
-        print(img)
         img[:, 0] = img[:, 0] / img[:, 2]
         img[:, 1] = img[:, 1] / img[:, 2]
         pts = img[:, 0:2]
@@ -93,7 +92,7 @@ class perspectiveMatrix():
         pt = pt_ball_n.dot(perspectiveMatrix)
         pt = pt/pt[0, 2]
 
-        print(pt[0, 0:2])
+        #print(pt[0, 0:2])
 
 # i1 = 220
 # j1 = 140
@@ -128,9 +127,9 @@ if __name__ == '__main__':
     pt_ball = np.array([300, 250])
     start = time.time()
     M = perspectiveMatrix()
+
+
     answer = M.getperspectiveMatrix(pt1, pt2)
-
-
     pts = M.calculatePerspective(pt1, answer)
     M.calculateBallPosition(pt_ball, answer)
     # img = M.genImg(np.array([pts]))
