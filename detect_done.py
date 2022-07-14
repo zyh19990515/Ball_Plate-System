@@ -55,7 +55,7 @@ if __name__ == '__main__':
     camera_init(ip)
     videoIp = "http://" + ip + ":81/stream"
     video = cv2.VideoCapture(videoIp)
-
+    cnt = 1
     while True:
         sucess, img = video.read()
 
@@ -63,15 +63,19 @@ if __name__ == '__main__':
             print(sucess)
             continue
         BD = Detect(img)
-        corner_pts = BD.board_main()
+
         try:
+            corner_pts = BD.board_main()
             ballpt = BD.ball_main()
-            img_show = BD.getImg(img, corner_pts, ballpt)
+            img_show = BD.getImg(img, corner_pts, ballPt=ballpt)
+            print("ball pt")
+            cnt += 1
         except:
             print("error")
+            continue
 
 
-        cv2.imshow("img_DONE", img)
+        cv2.imshow("img_DONE", img_show)
 
         k = cv2.waitKey(1)
 
@@ -79,3 +83,4 @@ if __name__ == '__main__':
             cv2.destroyAllWindows()
 
             break
+    print("cnt:", cnt)

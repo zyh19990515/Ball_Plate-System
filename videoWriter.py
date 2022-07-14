@@ -56,12 +56,13 @@ if __name__ == '__main__':
     # video = cv2.VideoCapture("http://192.168.137.156:81/stream")
     video = cv2.VideoCapture(videoIp)
     result = cv2.VideoWriter('1.mp4', fource, 20.0, (640, 480))
-
+    cnt=0
     while True:
         ret, frame = video.read()
         if ret is True:
             result.write(frame)
             cv2.imshow("1", frame)
+            cv2.imwrite(".\\frame\\"+str(cnt)+".jpg", frame)
             if cv2.waitKey(1)==ord('q'):
                 break
         else:
