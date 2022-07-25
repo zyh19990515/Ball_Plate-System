@@ -19,9 +19,8 @@ class KalmanFilter:
 
 if __name__ == '__main__':
     kf = KalmanFilter()
-
     img = cv2.imread(".\\picture\\blue_background.jpg")
-    img = cv2.resize(img, (1640, 720))
+    img = cv2.resize(img, (640, 480))
 
     ball_positions = [(4, 300), (61, 256), (116, 214), (170, 180), (225, 148), (279, 120), (332, 97),
                       (383, 80), (434, 66), (484, 55), (535, 49), (586, 49), (634, 50),
@@ -35,7 +34,7 @@ if __name__ == '__main__':
         #print(predicted)
         cv2.circle(img, predicted, 5, (255, 255, 255), 4)
 
-    for i in range(10):  # 用预测出的第一个预测点作为新预测点的评估对象，得出第二个预测点，之后再将第二个预测点作为第三个预测点的评估对象，得到第三个预测点，反反复复得到十个预测点
+    for i in range(5):  # 用预测出的第一个预测点作为新预测点的评估对象，得出第二个预测点，之后再将第二个预测点作为第三个预测点的评估对象，得到第三个预测点，反反复复得到十个预测点
         predicted = kf.predict(predicted[0], predicted[1])
         print(predicted)
         cv2.circle(img, predicted, 5, (0, 0, 0), 4)

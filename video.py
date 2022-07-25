@@ -68,17 +68,17 @@ if __name__ == '__main__':
             #print("ball_pt: ", ball_pt)
             #print("ballP: ", ballP)
 
-            img_show = bd.getImg(img, corner_pts, ballPt=ball_pt)
+            img_show = bd.getImg(corner_pts, ballPt=ball_pt)
 
             ball.append(ball_pt)
             #dataSave(corner_pt=corner_pts, ball_pt=ball_pt, cnt=cnt)
-            print("save done")
         except:
             print("no")
+            img_show = img
             continue
 
         cv2.imshow("1", img_show)
-        time.sleep(0.1)
+        time.sleep(0.06)
         k = cv2.waitKey(1)
 
 
