@@ -2,10 +2,12 @@ import cv2
 import numpy as np
 import time
 
+
+
 class perspectiveMatrix():
     def __init__(self):
-        self.A = np.zeros((8, 8), dtype=np.float)   # 系数矩阵
-        self.XY = np.zeros((8, 1), dtype=np.float)  # 系数矩阵后两列
+        self.A = np.zeros((8, 8), dtype=np.float32)   # 系数矩阵
+        self.XY = np.zeros((8, 1), dtype=np.float32)  # 系数矩阵后两列
     def matrixInit(self, pt1, pt2):     # 系数矩阵初始化
         self.A[0][2] = 1
         self.A[1][2] = 1
@@ -31,7 +33,7 @@ class perspectiveMatrix():
 
         a = np.linalg.solve(self.A, self.XY)
         #print(a)
-        answer = np.zeros((3, 3), dtype=np.float)
+        answer = np.zeros((3, 3), dtype=np.float32)
         # answer[0][:] = a[0:3].T
         # answer[1][:] = a[3:6].T
         # answer[2][0:2] = a[6:8].T
@@ -45,7 +47,7 @@ class perspectiveMatrix():
         return answer
 
     def matrixNormalize(self, p):   #将[x,y]转换成[x,y,1]
-        n = np.ones((4, 3), dtype=np.float)
+        n = np.ones((4, 3), dtype=np.float32)
         n[:, 0:2] = p
         return n
 
@@ -60,7 +62,7 @@ class perspectiveMatrix():
 
         temp = [cor[pt_position[0]], cor[pt_position[1]], cor[pt_position[2]], cor[pt_position[3]]]
 
-        pt_temp = np.zeros((4, 2), dtype=np.float)
+        pt_temp = np.zeros((4, 2), dtype=np.float32)
         pt_temp[0] = pt[temp[0]]
         pt_temp[1] = pt[temp[2]]
         pt_temp[2] = pt[temp[3]]
@@ -87,13 +89,21 @@ class perspectiveMatrix():
         pts = np.array(pts, dtype=np.int32)
         return pts
     def calculateBallPosition(self, pt_ball, perspectiveMatrix):
-        pt_ball_n = np.ones((1, 3), dtype=np.float)
+        pt_ball_n = np.ones((1, 3), dtype=np.float32)
         pt_ball_n[0, 0:2] = pt_ball
         pt = pt_ball_n.dot(perspectiveMatrix)
         pt = pt/pt[0, 2]
+        print("ball\n")
+        print(pt)
 
         #print(pt[0, 0:2])
-
+    def main(self):
+        answer = self.getperspectiveMatrix(pt1, pt2)
+        pts = self.calculatePerspective(pt1, answer)
+        self.calculateBallPosition(pt_ball, answer)
+        # img = M.genImg(np.array([pts]))
+        # cv2.imshow("a", img)
+        pts2 = M.calculatePerspective(pt2, np.linalg.pinv(answer))
 # i1 = 220
 # j1 = 140
 #
@@ -135,6 +145,7 @@ if __name__ == '__main__':
     # img = M.genImg(np.array([pts]))
     # cv2.imshow("a", img)
     pts2 = M.calculatePerspective(pt2, np.linalg.pinv(answer))
+    print(pts2)
     end = time.time()
     # img_2 = M.genImg(np.array([pts2]))
     # cv2.imshow("b", img_2)

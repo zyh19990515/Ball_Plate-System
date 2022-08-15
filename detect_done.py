@@ -9,17 +9,14 @@ import re
 
 def serialData():
     s = serial.Serial('com3', 115200)
-
     st = ''
     while True:
-
         while True:
             char = str(s.read(), 'utf-8')
             # print(char)
             try:
                 # print(char)
                 st = st + char
-
             except:
                 continue
             if (char == '\n'):
@@ -27,7 +24,6 @@ def serialData():
         try:
             ipList = re.findall(r'[0-9]+(?:\.[0-9]+){3}', st)
             print(ipList[0])
-
             break
         except:
             print(st)
@@ -78,9 +74,7 @@ if __name__ == '__main__':
         cv2.imshow("img_DONE", img_show)
 
         k = cv2.waitKey(1)
-
         if k == 27:
             cv2.destroyAllWindows()
-
             break
     print("cnt:", cnt)
