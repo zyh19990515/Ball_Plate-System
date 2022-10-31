@@ -33,6 +33,7 @@ if __name__ == '__main__':
             st1 = re.findall(r'[XY]:[0-9]*', st)
             x = int(st1[0][2:])
             y = int(st1[1][2:])
+            print(x, " ", y)
         except:
             print("no pos")
         cv2.circle(img, [y, x], radius=3, color=255, thickness=3)
