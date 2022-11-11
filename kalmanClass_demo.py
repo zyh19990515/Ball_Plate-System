@@ -7,7 +7,7 @@ class Kalman():
         self.f = np.array([[1, 1], [0, 1]], dtype=np.float)
         self.q = np.array([[0.1, 0], [0, 0.1]], dtype=np.float)
         self.h = np.array([1, 0], dtype=np.float)
-        self.r = 0.1
+        self.r = 0.8
         self.x_ = 0.
         self.p_ = 0.
 

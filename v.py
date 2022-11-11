@@ -4,15 +4,15 @@ import re
 import time
 
 if __name__ == '__main__':
-    s1 = serial.Serial('com13', 115200)
+    s1 = serial.Serial('com3', 115200)
     st = ''
     while True:
         start = time.time()
         char = str(s1.readline())
-        char = char[2:-5]
+        #char = char[2:-5]
         print(char)
-        end = time.time()
-        print(end-start)
+        # end = time.time()
+        # print(end-start)
 
             # s2.write(bytes(char.encode()))
             # char2 = str(s2.read())+"aaa\n"
